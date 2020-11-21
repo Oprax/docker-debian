@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: debian stable
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: registry.oprax.fr/debian
+    registry: registry.oprax.fr
+    tags:
+      - stable
+      - latest
+    dockerfile: stable/Dockerfile
+  when:
+    branch:
+      - master
